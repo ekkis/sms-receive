@@ -6,11 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ['sms'],
+  "keywords": ["sms"],
   "author": "Erick Calder <e@arix.com>",
   "license": "ISC",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/ekkis/sms-receive.git"
+  },
   "dependencies": {
     "node-fetch": "^2.3.0",
-    "node-html-parser": "^1.1.12",
+    "node-html-parser": "^1.1.12"
   }
 }
