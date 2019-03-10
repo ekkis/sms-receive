@@ -31,8 +31,8 @@ Returns an array of objects comprising phone numbers available for receipt of
 messages, and the countries where these ar located e.g.
 ```
 [{
-	loc: 'United States',
-	nbr: '+1 2015471451'
+    loc: 'United States',
+    nbr: '+1 2015471451'
 }]
 ```
 ### messages(sender, regexp, receiver)
@@ -46,9 +46,9 @@ objects returned comprise a sender phone number, the message, and a time offset
 when the message was sent e.g.
 ```
 [{
-	sender: '19852502821',
-	message: 'Use 428210 como seu codigo de login para o Tinder. (Account Kit by Facebook)',
-	time: '2 minutes ago'
+    sender: '19852502821',
+    message: 'Use 428210 como seu codigo de login para o Tinder. (Account Kit by Facebook)',
+    time: '2 minutes ago'
 }]
 ```
 ### check(sender, regexp, receiver)
@@ -87,14 +87,14 @@ sms.numbers().then(console.log);
 ```
 which produces a list similar to the following:
 
-> [ { loc: 'United States', nbr: '+1 2015471451' },
-> { loc: 'United States', nbr: '+1 6102851642' },
-> { loc: 'Canada', nbr: '+1 2264751261' },
-> { loc: 'Canada', nbr: '+1 2262421899' },
-> { loc: 'France', nbr: '+33 644633194' },
-> { loc: 'United Kingdom', nbr: '+44 7520632916' },
-> { loc: 'Sweden', nbr: '+46 769436478' },
-> { loc: 'Poland', nbr: '+48 732232809' } ]
+> [ { loc: 'United States', nbr: '+1 2015471451' },  
+> { loc: 'United States', nbr: '+1 6102851642' },  
+> { loc: 'Canada', nbr: '+1 2264751261' },  
+> { loc: 'Canada', nbr: '+1 2262421899' },  
+> { loc: 'France', nbr: '+33 644633194' },  
+> { loc: 'United Kingdom', nbr: '+44 7520632916' },  
+> { loc: 'Sweden', nbr: '+46 769436478' },  
+> { loc: 'Poland', nbr: '+48 732232809' } ]  
 
 Supposing the first number in the list is provided to your user, the list of
 messages sent to that number may be retrieved like this:
@@ -103,14 +103,14 @@ sms.messages('12015471451').then(console.log);
 ```
 producing something like:
 
-> [ { sender: '19852502821',
->    message:
->     'Use 428210 como seu codigo de login para o Tinder. (Account Kit by Facebook)',
->    time: '2 minutes ago' },
->  { sender: '19852502821',
->    message:
->     'Use 771145 as your login code for Smule. (Account Kit by Facebook)',
->    time: '13 minutes ago' },
+> [ { sender: '19852502821',  
+>    message:  
+>     'Use 428210 como seu codigo de login para o Tinder. (Account Kit by Facebook)',  
+>    time: '2 minutes ago' },  
+>  { sender: '19852502821',  
+>    message:  
+>     'Use 771145 as your login code for Smule. (Account Kit by Facebook)',  
+>    time: '13 minutes ago' },  
 
 Or the page can be checked for the sender to post a specific value (like a code):
 ```
