@@ -1,0 +1,16 @@
+{
+  "name": "sms-receive",
+  "version": "1.0.0",
+  "description": "A mechanism for receiving SMS messages at public addresses",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ['sms'],
+  "author": "Erick Calder <e@arix.com>",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.3.0",
+    "node-html-parser": "^1.1.12",
+  }
+}
