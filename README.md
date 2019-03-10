@@ -104,12 +104,12 @@ sms.messages('12015471451').then(console.log);
 producing something like:
 
 > [ { sender: '19852502821',  
->    message:  
->     'Use 428210 como seu codigo de login para o Tinder. (Account Kit by Facebook)',  
+>    message: 
+>     'Use 428210 como seu codigo de login para o Tinder.',  
 >    time: '2 minutes ago' },  
 >  { sender: '19852502821',  
->    message:  
->     'Use 771145 as your login code for Smule. (Account Kit by Facebook)',  
+>    message: 
+>     'Use 771145 as your login code for Smule',  
 >    time: '13 minutes ago' },  
 
 Or the page can be checked for the sender to post a specific value (like a code):
