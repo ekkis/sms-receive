@@ -9,6 +9,7 @@
   "keywords": ["sms"],
   "author": "Erick Calder <e@arix.com>",
   "license": "ISC",
+  "homepage": "https://github.com/ekkis/sms-receive",
   "repository": {
     "type" : "git",
     "url" : "https://github.com/ekkis/sms-receive.git"
