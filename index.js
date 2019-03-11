@@ -11,10 +11,13 @@ var self = module.exports = {
 			.map(o => o.childNodes[0].rawText);
 		var loc = find(html, 'number-boxes-item-country')
 			.map(o => o.childNodes[0].rawText);
+		var button = find(html, 'number-boxes-item-button')
+			.map(o => o.childNodes[0].rawText);
 
 		var ls = [];
 		for (var i = 0; i < nbr.length; i++)
-			ls.push({loc: loc[i], nbr: nbr[i]});
+			if (nbr[i] == 'Open') ls.push({loc: loc[i], nbr: nbr[i]});
+
 		return ls;
 	},
 	messages: async (receiver) => {
@@ -60,4 +63,3 @@ function find(html, sel) {
 		ret = ret.concat(find(o, sel));
 	return ret;
 }
-
