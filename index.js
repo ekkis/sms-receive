@@ -61,4 +61,3 @@ function find(html, sel) {
 	return ret;
 }
 
-self.messages('19893043244').then(console.log);
