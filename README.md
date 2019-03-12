@@ -28,12 +28,25 @@ const sms = require('sms-receive');
 ### numbers()
 
 Returns an array of objects comprising phone numbers available for receipt of
-messages, and the countries where these ar located e.g.
+messages, and the countries where these are located e.g.
 ```
 [{
     loc: 'United States',
     nbr: '+1 2015471451'
 }]
+```
+### numbers(country)
+
+If a country name is passed to this method, a list of phone numbers available
+for that country are returned e.g.
+```
+['+1 2015471451', '+1 8185551212', '+1 2128880000']
+```
+### countries()
+
+A list of the countries for which phone numbers are available is returned e.g.
+```
+['France', 'Sweden', 'United States']
 ```
 ### messages(sender, regexp, receiver)
 * `sender` the phone number expected to send a message
@@ -61,15 +74,19 @@ matching the given regular.  A true/false value is returned indicating whether
 the regular expressions matched against any message
 ### watch(cfg)
 * `sender`, `receiver`, `regexp` -- as used in `check()` above
-* `count` the number of times to poll (default: 3 times)
-* `delay` the interval between polls, specified in milliseconds (default: 5000ms)
+* `count` the number of times to poll (default: 6 times)
+* `delay` the interval between polls, specified in milliseconds (default: 5min)
 * `callback` the method to call when the watch completes
 
 The method polls the page for a desired the match a `count` number of times,
 waiting `delay` number of miliseconds in between polls.  The `callback` method
 is called whenever either: 1) a match is found (the callback is passed a true
 value) or, 2) the number of attempts expires (the callback is handed a false)
+### init()
 
+Used to fetch the main directory of available numbers.  It is unnecessary to call
+this method as it is called when the module is first required, but it can be used
+to re-fetch the contents of the main page
 ## Examples
 
 The examples below use the promise call-style but the async/await

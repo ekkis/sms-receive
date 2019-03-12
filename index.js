@@ -2,7 +2,8 @@ const fetch = require('node-fetch');
 var HTML = require('node-html-parser');
 
 var self = module.exports = {
-	numbers: async () => {
+	cache: {},
+	init: async () => {
 		var s = await fetch('https://receive-smss.com')
 			.then(res => res.text());
 		var html = HTML.parse(s);
@@ -11,14 +12,28 @@ var self = module.exports = {
 			.map(o => o.childNodes[0].rawText);
 		var loc = find(html, 'number-boxes-item-country')
 			.map(o => o.childNodes[0].rawText);
-		var button = find(html, 'number-boxes-item-button')
+		var stat = find(html, 'number-boxes-item-button')
 			.map(o => o.childNodes[0].rawText);
 
 		var ls = [];
 		for (var i = 0; i < nbr.length; i++)
-			if (nbr[i] == 'Open') ls.push({loc: loc[i], nbr: nbr[i]});
+			if (stat[i] == 'Open') ls.push({loc: loc[i], nbr: nbr[i]});
 
-		return ls;
+		self.cache.numbers = ls
+	},
+	numbers: (country) => {
+		var ls = self.cache.numbers;
+		if (!ls) throw new Error('sms-receive: Not initialised')
+
+		return (country)
+			? ls.filter(o => o.loc == country).map(o => o.nbr)
+			: ls;
+	},
+	countries: () => {
+		var ls = self.cache.numbers;
+		if (!ls) throw new Error('sms-receive: Not initialised')
+
+		return ls.map(o => o.loc).sort().unique();
 	},
 	messages: async (receiver) => {
 		var url = 'https://receive-smss.com/sms/' + receiver;
@@ -43,8 +58,8 @@ var self = module.exports = {
 		return false;
 	},
 	watch: (cfg) => {
-		var count = cfg.count || 3;
-		var id = setInterval(chk, cfg.delay || 5000);
+		var count = cfg.count || 6;
+		var id = setInterval(chk, cfg.delay || 5 * 60 * 1000);
 		async function chk() {
 			var res = await self.check(cfg.sender, cfg.re, cfg.receiver);
 			if (res || --count <= 0) {
@@ -55,6 +70,8 @@ var self = module.exports = {
 	}
 };
 
+self.init().catch(console.log);
+
 function find(html, sel) {
 	var ret = [];
 	if (html.classNames && html.classNames.filter(s => s.match(sel)).length > 0) 
@@ -62,4 +79,8 @@ function find(html, sel) {
 	for (var o of html.childNodes)
 		ret = ret.concat(find(o, sel));
 	return ret;
+}
+
+Array.prototype.unique = function() { 
+    return this.filter((e, pos) => this.indexOf(e) == pos);
 }
