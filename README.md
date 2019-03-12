@@ -15,16 +15,12 @@ keyword, and then when the user texts the given code, his number can be verified
 ```
 npm install sms-receive --save
 ```
+## API
 
-## Loading the module
-
-In the usual manner, simply require the package:
+Load the module in the usual manner, by requiring the package:
 ```
 const sms = require('sms-receive');
 ```
-
-## API
-
 ### numbers()
 
 Returns an array of objects comprising phone numbers available for receipt of
