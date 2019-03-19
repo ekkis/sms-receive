@@ -1,6 +1,6 @@
 {
   "name": "sms-receive",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A mechanism for receiving SMS messages at public addresses",
   "main": "index.js",
   "scripts": {
