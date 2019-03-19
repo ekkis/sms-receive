@@ -11,16 +11,24 @@ is free, the procedure can be reversed.  Give the user a phone number from the
 list of public numbers available from via this service, and a unique code or
 keyword, and then when the user texts the given code, his number can be verified
 
-## Installation
+## Install
+Add to your project from the NPM repository:
 ```
 npm install sms-receive --save
 ```
-## API
-
-Load the module in the usual manner, by requiring the package:
+and grab an instance:
 ```
+// using ES6  modules
+import sms from 'sms-receive';
+
+// using CommonJS modules
 const sms = require('sms-receive');
 ```
+
+## Usage
+
+The following methods are available
+
 ### numbers()
 
 Returns an array of objects comprising phone numbers available for receipt of

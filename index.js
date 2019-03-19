@@ -1,8 +1,8 @@
 const fetch = require('node-fetch');
 var HTML = require('node-html-parser');
 
+var cache = {};
 var self = module.exports = {
-	cache: {},
 	init: async () => {
 		var s = await fetch('https://receive-smss.com')
 			.then(res => res.text());
@@ -19,20 +19,17 @@ var self = module.exports = {
 		for (var i = 0; i < nbr.length; i++)
 			if (stat[i] == 'Open') ls.push({loc: loc[i], nbr: nbr[i]});
 
-		self.cache.numbers = ls
+		return cache.numbers = ls;
 	},
-	numbers: (country) => {
-		var ls = self.cache.numbers;
-		if (!ls) throw new Error('sms-receive: Not initialised')
+	numbers: async (country) => {
+		var ls = cache.numbers || await self.init();
 
 		return (country)
 			? ls.filter(o => o.loc == country).map(o => o.nbr)
 			: ls;
 	},
-	countries: () => {
-		var ls = self.cache.numbers;
-		if (!ls) throw new Error('sms-receive: Not initialised')
-
+	countries: async () => {
+		var ls = cache.numbers || await self.init();
 		return ls.map(o => o.loc).sort().unique();
 	},
 	messages: async (receiver) => {
@@ -69,8 +66,6 @@ var self = module.exports = {
 		}
 	}
 };
-
-self.init().catch(console.log);
 
 function find(html, sel) {
 	var ret = [];

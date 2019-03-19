@@ -4,7 +4,7 @@
   "description": "A mechanism for receiving SMS messages at public addresses",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha t/**/*.js"
   },
   "keywords": [
     "sms"
@@ -19,5 +19,8 @@
   "dependencies": {
     "node-fetch": "^2.3.0",
     "node-html-parser": "^1.1.12"
+  },
+  "devDependencies": {
+    "mocha": "^6.0.2"
   }
 }
