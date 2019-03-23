@@ -17,7 +17,7 @@ Add to your project from the NPM repository:
 npm install sms-receive --save
 ```
 and grab an instance:
-```
+```javascript
 // using ES6  modules
 import sms from 'sms-receive';
 
@@ -33,7 +33,7 @@ The following methods are available
 
 Returns an array of objects comprising phone numbers available for receipt of
 messages, and the countries where these are located e.g.
-```
+```javascript
 [{
     loc: 'United States',
     nbr: '+1 2015471451'
@@ -43,13 +43,13 @@ messages, and the countries where these are located e.g.
 
 If a country name is passed to this method, a list of phone numbers available
 for that country are returned e.g.
-```
+```javascript
 ['+1 2015471451', '+1 8185551212', '+1 2128880000']
 ```
 ### countries()
 
 A list of the countries for which phone numbers are available is returned e.g.
-```
+```javascript
 ['France', 'Sweden', 'United States']
 ```
 
@@ -62,7 +62,7 @@ Retrieves a list of the messages recently sent to the given receiver by various
 senders.  This list shifts across time as the service expires old messages.  The
 objects returned comprise a sender phone number, the message, and a time offset
 when the message was sent e.g.
-```
+```javascript
 [{
     sender: '19852502821',
     message: 'Use 428210 como seu codigo de login para o Tinder. (Account Kit by Facebook)',
@@ -109,7 +109,7 @@ promise
 The examples below use the promise call-style but the async/await
 paradigm can also be used:
 
-```
+```javascript
 # as a promise
 sms.numbers().then(console.log);
 
@@ -132,7 +132,7 @@ which produces a list similar to the following:
 
 Supposing the first number in the list is provided to your user, the list of
 messages sent to that number may be retrieved like this:
-```
+```javascript
 sms.messages('12015471451').then(console.log);
 ```
 producing something like:
@@ -151,13 +151,13 @@ producing something like:
 > ]  
 
 Or the page can be checked for the sender to post a specific value (like a code):
-```
+```javascript
 sms.check('19852502821', /Use 428210/, '12015471451')
     .then(res => console.log(res ? 'CODE SENT': 'CODE NOT YET SENT'));
 ```
 And the page can also be watched.  The example below expires after 3 times,
 with 3 second waits in between:
-```
+```javascript
 self.watch({
     sender: '19852502821',
     receiver: '12015471451',
