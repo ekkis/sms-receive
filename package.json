@@ -1,13 +1,13 @@
 {
   "name": "sms-receive",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A mechanism for receiving SMS messages at public addresses",
   "main": "index.js",
   "scripts": {
     "test": "mocha t/**/*.js"
   },
   "keywords": [
-    "sms"
+    "sms", "phone"
   ],
   "author": "Erick Calder <e@arix.com>",
   "license": "ISC",
@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "node-fetch": "^2.3.0",
-    "node-html-parser": "^1.1.12"
+    "node-html-parser": "^1.1.12",
+    "phonenumberlite": "^0.1.7"
   },
   "devDependencies": {
     "mocha": "^6.0.2"

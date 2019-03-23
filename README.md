@@ -52,6 +52,7 @@ A list of the countries for which phone numbers are available is returned e.g.
 ```
 ['France', 'Sweden', 'United States']
 ```
+
 ### messages(sender, regexp, receiver)
 * `sender` the phone number expected to send a message
 * `regexp` a regular expression used to find a match
@@ -68,16 +69,18 @@ when the message was sent e.g.
     time: '2 minutes ago'
 }]
 ```
-### check(sender, regexp, receiver)
+
+### check(receiver, sender, regexp)
+* `receiver` indicates which phone number to watch for sent messages
 * `sender` specifies the phone number sending the message
 * `regexp` is a regular expression used to match against messages received
-* `receiver` indicates which phone number to watch for sent messages
 
 The method checks the site for messages sent to the receiver by the sender
 matching the given regular.  A true/false value is returned indicating whether
 the regular expressions matched against any message
+
 ### watch(cfg)
-* `sender`, `receiver`, `regexp` -- as used in `check()` above
+* `receiver`, `sender`, `regexp` -- as used in `check()` above
 * `count` the number of times to poll (default: 6 times)
 * `delay` the interval between polls, specified in milliseconds (default: 5min)
 * `callback` the method to call when the watch completes
@@ -86,11 +89,21 @@ The method polls the page for a desired the match a `count` number of times,
 waiting `delay` number of miliseconds in between polls.  The `callback` method
 is called whenever either: 1) a match is found (the callback is passed a true
 value) or, 2) the number of attempts expires (the callback is handed a false)
-### init()
+
+### fetch()
 
 Used to fetch the main directory of available numbers.  It is unnecessary to call
-this method as it is called when the module is first required, but it can be used
-to re-fetch the contents of the main page
+this method as it is automatically called by other methods in the module, but it 
+can be used to force-fetch a list of numbers
+
+### config(o)
+* fetch - specifies a function that can fetch a url and returns text
+
+By default the module uses `node-fetch` but this dependency can be injected
+using this mechanism.  The requirements for the provided function are the it
+must accept a `url` and and `opts` object, and must return text wrapped in a
+promise
+
 ## Examples
 
 The examples below use the promise call-style but the async/await
@@ -102,20 +115,20 @@ sms.numbers().then(console.log);
 
 # async/await
 (async () => {
-    var ls = await sms.numbers();
-    console.log(ls);
+    console.log(await sms.numbers());
 })();
 ```
 which produces a list similar to the following:
 
-> [ { loc: 'United States', nbr: '+1 2015471451' },  
-> { loc: 'United States', nbr: '+1 6102851642' },  
-> { loc: 'Canada', nbr: '+1 2264751261' },  
-> { loc: 'Canada', nbr: '+1 2262421899' },  
-> { loc: 'France', nbr: '+33 644633194' },  
-> { loc: 'United Kingdom', nbr: '+44 7520632916' },  
-> { loc: 'Sweden', nbr: '+46 769436478' },  
-> { loc: 'Poland', nbr: '+48 732232809' } ]  
+> [
+>   { loc: 'United States', nbr: '+1 989-304-3244' },
+>   { loc: 'Canada', nbr: '+1 226-475-1261' },
+>   { loc: 'France', nbr: '+33 6 44 63 33 89' },
+>   { loc: 'United Kingdom', nbr: '+44 75 2063 2670' },
+>   { loc: 'United Kingdom', nbr: '+44 7520 660692' },
+>   { loc: 'Sweden', nbr: '+46 765 19 53 49' },
+>   { loc: 'Poland', nbr: '+48 73 210 49 26' },
+> ]
 
 Supposing the first number in the list is provided to your user, the list of
 messages sent to that number may be retrieved like this:
@@ -124,14 +137,18 @@ sms.messages('12015471451').then(console.log);
 ```
 producing something like:
 
-> [ { sender: '19852502821',  
->    message: 
->     'Use 428210 como seu codigo de login para o Tinder.',  
->    time: '2 minutes ago' },  
->  { sender: '19852502821',  
->    message: 
->     'Use 771145 as your login code for Smule',  
->    time: '13 minutes ago' },  
+> [
+>   {
+>      sender: '19852502821',  
+>      message: 'Use 428210 como seu codigo de login para o Tinder.',  
+>      time: '2 minutes ago'
+>   },  
+>   {
+>      sender: '19852502821',  
+>      message: 'Use 771145 as your login code for Smule',  
+>      time: '13 minutes ago'
+>   }
+> ]  
 
 Or the page can be checked for the sender to post a specific value (like a code):
 ```
@@ -152,3 +169,8 @@ self.watch({
 ```
 ## Licence
 ISC
+
+## Support
+
+For support post an issue on Github or reach out to me on Telegram.
+My username is [@ekkis](https://t.me/ekkis)
