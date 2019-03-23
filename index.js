@@ -39,7 +39,7 @@ var self = module.exports = {
 		return ls.map(o => o.loc).sort().unique();
 	},
 	messages: async (receiver) => {
-		var url = 'https://receive-smss.com/sms/' + receiver;
+		var url = 'https://receive-smss.com/sms/' + clean(receiver);
 		var s = await config.fetch(url);
 		var html = HTML.parse(s);
 		var cells = find(html, 'wrpcel')
@@ -53,6 +53,7 @@ var self = module.exports = {
 		return ret;
 	},
 	check: async (receiver, sender, re) => {
+		sender = clean(sender);
 		var ls = await self.messages(receiver);
 		ls = ls.filter(o => o.sender == sender && o.message.match(re));
 		return ls.length > 0;
@@ -77,6 +78,13 @@ function find(html, sel) {
 	for (var o of html.childNodes)
 		ret = ret.concat(find(o, sel));
 	return ret;
+}
+
+function clean(nbr) {
+	var t = typeof nbr;
+	if (t == 'number') nbr = nbr.toString();
+	if (t == 'object') throw new Error('Cannot clean objects');
+	return (nbr || '').replace(/\D/g, '');
 }
 
 Array.prototype.unique = function() { 

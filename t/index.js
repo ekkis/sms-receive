@@ -41,6 +41,16 @@ describe('Integration tests', () => {
             assert.ok(!found, 'Array is not distinct')
         })
     })
+    describe('Messages', () => {
+        it('Fetches properly', async () => {
+            var nbrs = await sms.numbers()
+            var msgs = await sms.messages(nbrs[0].nbr)
+            assert.ok(Array.isArray(msgs), 'Is not an array')
+            assert.ok(msgs.length > 0, 'Array is empty')
+            assert.ok('sender' in msgs[0], 'Containts sender')
+            assert.ok('message' in msgs[0], 'Containts message')
+        })
+    })
 })
 
 describe('Unit tests', () => {
@@ -113,9 +123,19 @@ describe('Unit tests', () => {
             actual = await sms.check('', '12135168202', /310637/);
             assert.ok(actual == false, 'Found code when it shouldn\'t')
         })
+        it('Adjusts for formatted numbers', async () => {
+            var actual = await sms.check('', '+17742201178', /310637/);
+            assert.ok(actual == true, 'Failed with initial +')
+            actual = await sms.check('', '+1 774-220-1178', /310637/);
+            assert.ok(actual == true, 'Failed with dashes and spaces')
+        })
+        it('Handles numbers as integers', async () => {
+            var actual = await sms.check('', 17742201178, /310637/);
+            assert.ok(actual == true, 'Failed with initial +')
+        })
         it('Watch succeeds', (done) => {
             sms.watch({
-                sender: 17742201178, 
+                sender: '17742201178', 
                 re: /310637/, 
                 delay: 0,
                 callback: (res) => { done(); return res; }
