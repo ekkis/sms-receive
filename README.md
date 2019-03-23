@@ -120,36 +120,37 @@ sms.numbers().then(console.log);
 ```
 which produces a list similar to the following:
 
-> [
->   { loc: 'United States', nbr: '+1 989-304-3244' },
->   { loc: 'Canada', nbr: '+1 226-475-1261' },
->   { loc: 'France', nbr: '+33 6 44 63 33 89' },
->   { loc: 'United Kingdom', nbr: '+44 75 2063 2670' },
->   { loc: 'United Kingdom', nbr: '+44 7520 660692' },
->   { loc: 'Sweden', nbr: '+46 765 19 53 49' },
->   { loc: 'Poland', nbr: '+48 73 210 49 26' },
-> ]
-
+```javascript
+[
+  { loc: 'United States', nbr: '+1 989-304-3244' },
+  { loc: 'Canada', nbr: '+1 226-475-1261' },
+  { loc: 'France', nbr: '+33 6 44 63 33 89' },
+  { loc: 'United Kingdom', nbr: '+44 75 2063 2670' },
+  { loc: 'United Kingdom', nbr: '+44 7520 660692' },
+  { loc: 'Sweden', nbr: '+46 765 19 53 49' },
+  { loc: 'Poland', nbr: '+48 73 210 49 26' },
+]
+```
 Supposing the first number in the list is provided to your user, the list of
 messages sent to that number may be retrieved like this:
 ```javascript
 sms.messages('12015471451').then(console.log);
 ```
 producing something like:
-
-> [
->   {
->      sender: '19852502821',  
->      message: 'Use 428210 como seu codigo de login para o Tinder.',  
->      time: '2 minutes ago'
->   },  
->   {
->      sender: '19852502821',  
->      message: 'Use 771145 as your login code for Smule',  
->      time: '13 minutes ago'
->   }
-> ]  
-
+```javascript
+[
+  {
+     sender: '19852502821',  
+     message: 'Use 428210 como seu codigo de login para o Tinder.',  
+     time: '2 minutes ago'
+  },  
+  {
+     sender: '19852502821',  
+     message: 'Use 771145 as your login code for Smule',  
+     time: '13 minutes ago'
+  }
+]  
+```
 Or the page can be checked for the sender to post a specific value (like a code):
 ```javascript
 sms.check('19852502821', /Use 428210/, '12015471451')
