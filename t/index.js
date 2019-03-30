@@ -5,10 +5,13 @@ const sms = require('../index.js')
 // integration tests must be run first because the dependency
 // injection needed for the unit tests cannot be undone
 
-describe('Integration tests', () => {
+describe('Integration tests', function () {
+    this.timeout(5000); // the site is a bit slow somtimes and exceeds the mocha timeout
+
     describe('Numbers', () => {
         var actual;
         before(async () => {
+            sms.config({number: 'number-boxes-itemm-number'})
             actual = await sms.numbers();
         })
         it('Should return multiple choices', async () => {
@@ -46,13 +49,12 @@ describe('Integration tests', () => {
             var nbrs = await sms.numbers()
             var msgs = await sms.messages(nbrs[0].nbr)
             assert.ok(Array.isArray(msgs), 'Is not an array')
-            assert.ok(msgs.length > 0, 'Array is empty')
+            assert.ok(msgs.length > 0, 'Array is empty for [' + nbrs[0].nbr + ']')
             assert.ok('sender' in msgs[0], 'Containts sender')
             assert.ok('message' in msgs[0], 'Containts message')
         })
     })
 })
-
 describe('Unit tests', () => {
     describe('Numbers', () => {
         before(() => {

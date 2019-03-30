@@ -4,19 +4,23 @@ var PNL = require('phonenumberlite');
 
 var cache = {};
 var config = {
-	fetch: (url, opts) => fetch(url, opts).then(res => res.text())
+	fetch: (url, opts) => fetch(url, opts).then(res => res.text()),
+	number: 'number-boxes-item-number',
+	country: 'number-boxes-item-country',
+	button: 'number-boxes-item-button',
+	message: 'wrpcsel'
 }
 var self = module.exports = {
 	config: opts => { Object.assign(config, opts) },
 	fetch: async () => {
 		var s = await config.fetch('https://receive-smss.com');
 		var html = HTML.parse(s);
-		
-		var nbr = find(html, 'number-boxes-item-number')
+
+		var nbr = find(html, config.number)
 			.map(o => o.childNodes[0].rawText);
-		var loc = find(html, 'number-boxes-item-country')
+		var loc = find(html, config.country)
 			.map(o => o.childNodes[0].rawText);
-		var stat = find(html, 'number-boxes-item-button')
+		var stat = find(html, config.button)
 			.map(o => o.childNodes[0].rawText);
 
 		var ls = [];
@@ -42,7 +46,7 @@ var self = module.exports = {
 		var url = 'https://receive-smss.com/sms/' + clean(receiver);
 		var s = await config.fetch(url);
 		var html = HTML.parse(s);
-		var cells = find(html, 'wrpcel')
+		var cells = find(html, config.message)
 			.map(o => (o.childNodes[0] || {}).rawText);
 
 		var ret = [];

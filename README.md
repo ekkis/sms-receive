@@ -98,11 +98,26 @@ can be used to force-fetch a list of numbers
 
 ### config(o)
 * fetch - specifies a function that can fetch a url and returns text
+* number - specifies the class name to look for numbers for within the HTML
+* country - (see above)
+* button - (see above)
+* message - (see above)
 
 By default the module uses `node-fetch` but this dependency can be injected
 using this mechanism.  The requirements for the provided function are the it
 must accept a `url` and and `opts` object, and must return text wrapped in a
 promise
+
+The website may from time to time change the class names used to identify parts
+of the contents.  If this happens the module will stop returning data.  The suggestion
+is to run the integration tests and if those fail, investigate what the new class
+names are.  Then configure like this:
+
+```js
+// this fixes the module to work again.  obviously some developer renamed the
+// class with a double-m 
+sms.config({number: 'number-boxes-itemm-number'});
+```
 
 ## Examples
 
@@ -110,10 +125,10 @@ The examples below use the promise call-style but the async/await
 paradigm can also be used:
 
 ```javascript
-# as a promise
+// as a promise
 sms.numbers().then(console.log);
 
-# async/await
+// async/await
 (async () => {
     console.log(await sms.numbers());
 })();
