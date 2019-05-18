@@ -90,6 +90,10 @@ waiting `delay` number of miliseconds in between polls.  The `callback` method
 is called whenever either: 1) a match is found (the callback is passed a true
 value) or, 2) the number of attempts expires (the callback is handed a false)
 
+A watch can be made eternal by setting `count: -1` and must thus be cancelled by
+making a niladic call: `.watch()`.  The interval id is returned to the caller
+when the watch is first set up
+
 ### fetch()
 
 Used to fetch the main directory of available numbers.  It is unnecessary to call

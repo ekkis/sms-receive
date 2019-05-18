@@ -2,6 +2,12 @@ const fs = require('fs')
 const assert = require('assert').strict
 const sms = require('../index.js')
 
+const Timeout = (() => {
+    var id = setInterval(() => null, 0);
+    clearInterval(id);
+    return id.constructor;
+})()
+
 // integration tests must be run first because the dependency
 // injection needed for the unit tests cannot be undone
 
@@ -142,6 +148,18 @@ describe('Unit tests', () => {
                 delay: 0,
                 callback: (res) => { done(); return res; }
             })
+        })
+        it('Watch cancellation succeeds', (done) => {
+            var id = sms.watch({
+                sender: '17742201178', 
+                re: /310X37/,
+                count: -1, 
+                delay: 500,
+                callback: (res) => { return res; }
+            })
+            assert.ok(id instanceof Timeout)
+            sms.watch()
+            done()
         })
     })
 })

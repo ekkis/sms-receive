@@ -63,15 +63,20 @@ var self = module.exports = {
 		return ls.length > 0;
 	},
 	watch: (cfg) => {
+		if (!cfg && cache.watcher) {
+			clearInterval(cache.watcher);
+			return cache.watcher = undefined;
+		} 
 		var count = cfg.count || 6;
-		var id = setInterval(chk, 'delay' in cfg ? cfg.delay : 5 * 60 * 1000);
+		cache.watcher = setInterval(chk, 'delay' in cfg ? cfg.delay : 5 * 60 * 1000);
 		async function chk() {
 			var res = await self.check(cfg.receiver, cfg.sender, cfg.re);
-			if (res || --count <= 0) {
-				clearInterval(id);
+			if (res || --count == 0) {
+				clearInterval(cache.watcher);
 				cfg.callback(res);
 			}
 		}
+		return cache.watcher;
 	}
 };
 
