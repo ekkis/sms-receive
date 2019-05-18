@@ -4,7 +4,10 @@
   "description": "A mechanism for receiving SMS messages at public addresses",
   "main": "index.js",
   "scripts": {
-    "test": "mocha t/**/*.js"
+    "test": "mocha t/*.js",
+    "preversion": "npm run test",
+    "version": "",
+    "postversion": "git push && git push --tags && npm publish"
   },
   "keywords": [
     "sms",
