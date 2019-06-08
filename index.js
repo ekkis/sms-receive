@@ -8,7 +8,7 @@ var config = {
 	number: 'number-boxes-item-number',
 	country: 'number-boxes-item-country',
 	button: 'number-boxes-item-button',
-	message: 'wrpcsel'
+	message: 'wrpc1sel1'
 }
 var self = module.exports = {
 	config: opts => { Object.assign(config, opts) },
