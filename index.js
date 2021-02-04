@@ -4,11 +4,22 @@ var PNL = require('phonenumberlite');
 
 var cache = {};
 var config = {
-	fetch: (url, opts) => fetch(url, opts).then(res => res.text()),
+	fetch: (url, opts) => {
+		// Pages for specific phone numbers require cookies set by a previous visit, so save them.
+		if (cache.cookie) {
+			if (!opts) opts = {};
+			if (!opts.headers) opts.headers = {};
+			Object.assign(opts.headers, { 'cookie': cache.cookie });
+		}
+		return fetch(url, opts).then(res => {
+			cache.cookie = res.headers.get('set-cookie');
+			return res.text();
+		});
+	},
 	number: 'number-boxes-item-number',
 	country: 'number-boxes-item-country',
 	button: 'number-boxes-item-button',
-	message: 'wrpc1sel1'
+	message: 'wrpc5sel177'
 }
 var self = module.exports = {
 	config: opts => { Object.assign(config, opts) },
@@ -16,12 +27,9 @@ var self = module.exports = {
 		var s = await config.fetch('https://receive-smss.com');
 		var html = HTML.parse(s);
 
-		var nbr = find(html, config.number)
-			.map(o => o.childNodes[0].rawText);
-		var loc = find(html, config.country)
-			.map(o => o.childNodes[0].rawText);
-		var stat = find(html, config.button)
-			.map(o => o.childNodes[0].rawText);
+		var nbr = getText(html, config.number);
+		var loc = getText(html, config.country);
+		var stat = getText(html, config.button);
 
 		var ls = [];
 		for (var i = 0; i < nbr.length; i++) {
@@ -46,12 +54,15 @@ var self = module.exports = {
 		var url = 'https://receive-smss.com/sms/' + clean(receiver);
 		var s = await config.fetch(url);
 		var html = HTML.parse(s);
-		var cells = find(html, config.message)
-			.map(o => (o.childNodes[0] || {}).rawText);
+		var cells = getText(html, config.message);
 
 		var ret = [];
-		for (var i = 0; i < cells.length; i += 3) {
-			var o = {sender: cells[i], message: cells[i+1], time: cells[i+2]};
+		for (var i = 0; i < cells.length; i += 6) {
+			var o = {
+				sender: cells[i+1],
+				message: cells[i+4],
+				time: cells[i+3].replace(/[()]/g, ''), // remove parens from "(2 minutes) ago"
+			};
 			ret.push(o);
 		}
 		return ret;
@@ -59,7 +70,7 @@ var self = module.exports = {
 	check: async (receiver, sender, re) => {
 		sender = clean(sender);
 		var ls = await self.messages(receiver);
-		ls = ls.filter(o => o.sender == sender && o.message.match(re));
+		ls = ls.filter(o => clean(o.sender) == sender && o.message.match(re));
 		return ls.length > 0;
 	},
 	watch: (cfg) => {
@@ -80,13 +91,9 @@ var self = module.exports = {
 	}
 };
 
-function find(html, sel) {
-	var ret = [];
-	if (html.classNames && html.classNames.filter(s => s.match(sel)).length > 0) 
-		ret.push(html);
-	for (var o of html.childNodes)
-		ret = ret.concat(find(o, sel));
-	return ret;
+function getText(html, className) {
+	return html.querySelectorAll('.' + className)
+		.map(node => node.rawText);
 }
 
 function clean(nbr) {

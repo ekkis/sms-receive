@@ -116,12 +116,12 @@ describe('Unit tests', () => {
         it('Returns correct list', async () => {
             var actual = await sms.messages()
             var expected = [ 
-                { sender: '17742201178', message: 'Use 310637 as your login code for Tinder', time: '3 minutes ago' },
-                { sender: '17742201178', message: 'Use 531917 as your login code for Yubo', time: '3 minutes ago' },
-                { sender: '12135168202', message: 'Your Tinder code is 721578', time: '6 minutes ago' },
-                { sender: '17025003695', message: 'PayPal: Responda con su codigo. CODIGO: 303072', time: '7 minutes ago' },
-                { sender: '16787723168', message: 'BoxyPay Alert: Please NOTE that ...', time: '18 minutes ago' },
-                { sender: '12135168202', message: 'Your Tinder code is 071915', time: '2 hours ago' } 
+                { sender: '+17742201178', message: 'Use 310637 as your login code for Tinder', time: '3 minutes ago' },
+                { sender: '+17742201178', message: 'Use 531917 as your login code for Yubo', time: '3 minutes ago' },
+                { sender: '+12135168202', message: 'Your Tinder code is 721578', time: '6 minutes ago' },
+                { sender: '+17025003695', message: 'PayPal: Responda con su codigo. CODIGO: 303072', time: '7 minutes ago' },
+                { sender: '+16787723168', message: 'BoxyPay Alert: Please NOTE that ...', time: '18 minutes ago' },
+                { sender: '+12135168202', message: 'Your Tinder code is 071915', time: '2 hours ago' } 
             ]
             assert.deepEqual(actual, expected)
         })
