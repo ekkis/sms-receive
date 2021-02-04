@@ -72,23 +72,38 @@ describe('Unit tests', () => {
         it('Catalogue', async () => {
             var actual = await sms.numbers()
             var expected = [
-                { loc: 'United States', nbr: '+1 989-304-3244' },
-                { loc: 'United States', nbr: '+1 470-655-1642' },
-                { loc: 'United States', nbr: '+1 610-285-1642' },
-                { loc: 'Canada', nbr: '+1 226-475-1261' },
-                { loc: 'Canada', nbr: '+1 778-786-8717' },
-                { loc: 'Canada', nbr: '+1 226-242-1899' },
-                { loc: 'France', nbr: '+33 6 44 63 33 89' },
-                { loc: 'France', nbr: '+33 6 44 63 42 12' },
-                { loc: 'France', nbr: '+33 6 44 63 31 94' },
-                { loc: 'United Kingdom', nbr: '+44 75 2063 2670' },
-                { loc: 'United Kingdom', nbr: '+44 7520 660692' },
-                { loc: 'United Kingdom', nbr: '+44 752 063 2916' },
-                { loc: 'Sweden', nbr: '+46 765 19 53 49' },
-                { loc: 'Sweden', nbr: '+46 769 43 64 78' },
-                { loc: 'Poland', nbr: '+48 73 210 49 26' },
-                { loc: 'Poland', nbr: '+48 73 223 28 09' }
-            ];
+                { loc: 'United States', nbr: '+1 646-266-2535' },
+                { loc: 'Canada', nbr: '+1 646-258-7043' },
+                { loc: 'France', nbr: '+33 7 52 12 60 47' },
+                { loc: 'France', nbr: '+33 7 52 12 45 46' },
+                { loc: 'Germany', nbr: '+49 1520 7831169' },
+                { loc: 'Germany', nbr: '+49 1520 7829731' },
+                { loc: 'Germany', nbr: '+49 1520 7829823' },
+                { loc: 'United Kingdom', nbr: '+44 77 1688 5603' },
+                { loc: 'United Kingdom', nbr: '+44 753 339 8730' },
+                { loc: 'United Kingdom', nbr: '+44 750 340 2851' },
+                { loc: 'United Kingdom', nbr: '+44 7510 080109' },
+                { loc: 'United Kingdom', nbr: '+44 7510 080146' },
+                { loc: 'United Kingdom', nbr: '+44 753 340 3149' },
+                { loc: 'United Kingdom', nbr: '+44 750 340 2850' },
+                { loc: 'United Kingdom', nbr: '+44 7510 080141' },
+                { loc: 'United Kingdom', nbr: '+44 7510 080125' },
+                { loc: 'United Kingdom', nbr: '+44 730 991 7830' },
+                { loc: 'Russian Federation', nbr: '+7 921 162-96-74' },
+                { loc: 'Russian Federation', nbr: '+7 921 167-95-62' },
+                { loc: 'Russian Federation', nbr: '+7 921 167-96-65' },
+                { loc: 'Ukraine', nbr: '+380 93 248 5981' },
+                { loc: 'Poland', nbr: '+48 72 784 25 36' },
+                { loc: 'Poland', nbr: '+48 72 271 74 28' },
+                { loc: 'Netherlands', nbr: '+31 6 47264567' },
+                { loc: 'India', nbr: '+91 74287 23247' },
+                { loc: 'India', nbr: '+91 74287 30894' },
+                { loc: 'India', nbr: '+91 74287 31210' },
+                { loc: 'Israel', nbr: '+972 55-260-3210' },
+                { loc: 'Kazakhstan', nbr: '+7 778 949 0683' },
+                { loc: 'Thailand', nbr: '+66 95 396 1043' },
+                { loc: 'Thailand', nbr: '+66 88 623 1091' }
+              ];
         
             assert.deepEqual(actual, expected)
         })
@@ -97,11 +112,18 @@ describe('Unit tests', () => {
             var expected = [
                 'Canada',
                 'France',
+                'Germany',
+                'India',
+                'Israel',
+                'Kazakhstan',
+                'Netherlands',
                 'Poland',
-                'Sweden',
+                'Russian Federation',
+                'Thailand',
+                'Ukraine',
                 'United Kingdom',
                 'United States'
-            ];
+              ];
 
             assert.deepEqual(actual, expected)
         })

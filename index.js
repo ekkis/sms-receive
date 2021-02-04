@@ -16,7 +16,7 @@ var config = {
 			return res.text();
 		});
 	},
-	number: 'number-boxes-item-number',
+	number: 'number-boxes-itemm-number',
 	country: 'number-boxes-item-country',
 	button: 'number-boxes-item-button',
 	message: 'wrpc5sel177'
