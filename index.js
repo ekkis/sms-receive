@@ -60,8 +60,10 @@ var self = module.exports = {
 		for (var i = 0; i < cells.length; i += 6) {
 			var o = {
 				sender: cells[i+1],
-				message: cells[i+4],
-				time: cells[i+3].replace(/[()]/g, ''), // remove parens from "(2 minutes) ago"
+				message: cells[i+3],
+				time: cells[i+4]
+					.replace(/[()]/g, '') // remove parens from "(2 minutes) ago"
+					.replace(/ real message at receive-smss.com\/\d+$/g, '')
 			};
 			ret.push(o);
 		}
