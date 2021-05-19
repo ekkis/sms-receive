@@ -64,7 +64,7 @@ objects returned comprise a sender phone number, the message, and a time offset
 when the message was sent e.g.
 ```javascript
 [{
-    sender: '19852502821',
+    sender: '+19852502821',
     message: 'Use 428210 como seu codigo de login para o Tinder. (Account Kit by Facebook)',
     time: '2 minutes ago'
 }]
