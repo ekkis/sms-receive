@@ -187,6 +187,18 @@ self.watch({
     callback: res => { console.log(res ? 'FOUND' : 'FAILED'); }
 });
 ```
+
+## Contribute
+
+If you add functionality, make sure tests pass:
+```
+npm test
+```
+and when publishing, bump up the version like this:
+```
+npm version <patch|minor|major>
+```
+
 ## Licence
 ISC
 
