@@ -17,7 +17,7 @@ describe('Integration tests', function () {
     describe('Numbers', () => {
         var actual;
         before(async () => {
-            sms.config({number: 'number-boxes-itemm-number'})
+            // sms.config({number: 'number-boxes-itemm-number'})
             actual = await sms.numbers();
         })
         it('Should return multiple choices', async () => {
@@ -30,7 +30,7 @@ describe('Integration tests', function () {
         it('Numbers should be properly formatted', async () => {
             assert.ok(actual[0].nbr.match(/^\+/), 'Does not begin with a +')
             assert.ok(actual[0].nbr.match(/[\D +]/), 'Contains unsupported characters')
-        })    
+        })
     })
     describe('Countries', () => {
         var ls;
@@ -103,8 +103,8 @@ describe('Unit tests', () => {
                 { loc: 'Kazakhstan', nbr: '+7 778 949 0683' },
                 { loc: 'Thailand', nbr: '+66 95 396 1043' },
                 { loc: 'Thailand', nbr: '+66 88 623 1091' }
-              ];
-        
+            ];
+
             assert.deepEqual(actual, expected)
         })
         it('Countries', async () => {
@@ -123,7 +123,7 @@ describe('Unit tests', () => {
                 'Ukraine',
                 'United Kingdom',
                 'United States'
-              ];
+            ];
 
             assert.deepEqual(actual, expected)
         })
@@ -137,13 +137,13 @@ describe('Unit tests', () => {
         })
         it('Returns correct list', async () => {
             var actual = await sms.messages()
-            var expected = [ 
+            var expected = [
                 { sender: '+17742201178', message: 'Use 310637 as your login code for Tinder', time: '3 minutes ago' },
                 { sender: '+17742201178', message: 'Use 531917 as your login code for Yubo', time: '3 minutes ago' },
                 { sender: '+12135168202', message: 'Your Tinder code is 721578', time: '6 minutes ago' },
                 { sender: '+17025003695', message: 'PayPal: Responda con su codigo. CODIGO: 303072', time: '7 minutes ago' },
                 { sender: '+16787723168', message: 'BoxyPay Alert: Please NOTE that ...', time: '18 minutes ago' },
-                { sender: '+12135168202', message: 'Your Tinder code is 071915', time: '2 hours ago' } 
+                { sender: '+12135168202', message: 'Your Tinder code is 071915', time: '2 hours ago' }
             ]
             assert.deepEqual(actual, expected)
         })
@@ -165,17 +165,17 @@ describe('Unit tests', () => {
         })
         it('Watch succeeds', (done) => {
             sms.watch({
-                sender: '17742201178', 
-                re: /310637/, 
+                sender: '17742201178',
+                re: /310637/,
                 delay: 0,
                 callback: (res) => { done(); return res; }
             })
         })
         it('Watch cancellation succeeds', (done) => {
             var id = sms.watch({
-                sender: '17742201178', 
+                sender: '17742201178',
                 re: /310X37/,
-                count: -1, 
+                count: -1,
                 delay: 500,
                 callback: (res) => { return res; }
             })

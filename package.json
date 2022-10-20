@@ -21,7 +21,7 @@
     "url": "https://github.com/ekkis/sms-receive.git"
   },
   "dependencies": {
-    "node-fetch": "^3.1.1",
+    "node-fetch": "^2.6.7",
     "node-html-parser": "^1.1.12",
     "phonenumberlite": "^0.1.7"
   },
