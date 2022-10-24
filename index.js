@@ -35,6 +35,10 @@ var self = module.exports = {
 		for (var i = 0; i < nbr.length; i++) {
 			if (stat[i] != 'Open') continue;
 			var nn = PNL.parse(nbr[i]);
+			if (!nn) {
+				console.log('WARNING: ' + nbr[i] + ' failed to parse!')
+				continue
+			}
 			ls.push({ loc: loc[i], nbr: nn.internationalFormat });
 		}
 

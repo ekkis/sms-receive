@@ -17,7 +17,6 @@ describe('Integration tests', function () {
     describe('Numbers', () => {
         var actual;
         before(async () => {
-            // sms.config({number: 'number-boxes-itemm-number'})
             actual = await sms.numbers();
         })
         it('Should return multiple choices', async () => {
@@ -76,29 +75,29 @@ describe('Unit tests', () => {
                 { loc: 'Canada', nbr: '+1 646-258-7043' },
                 { loc: 'France', nbr: '+33 7 52 12 60 47' },
                 { loc: 'France', nbr: '+33 7 52 12 45 46' },
-                { loc: 'Germany', nbr: '+49 1520 7831169' },
-                { loc: 'Germany', nbr: '+49 1520 7829731' },
+                { loc: 'Germany', nbr: '+49 15 207831169' },
+                { loc: 'Germany', nbr: '+49 152 07829731' },
                 { loc: 'Germany', nbr: '+49 1520 7829823' },
-                { loc: 'United Kingdom', nbr: '+44 77 1688 5603' },
-                { loc: 'United Kingdom', nbr: '+44 753 339 8730' },
-                { loc: 'United Kingdom', nbr: '+44 750 340 2851' },
+                { loc: 'United Kingdom', nbr: '+44 7716 885603' },
+                { loc: 'United Kingdom', nbr: '+44 7533 398730' },
+                { loc: 'United Kingdom', nbr: '+44 7503 402851' },
                 { loc: 'United Kingdom', nbr: '+44 7510 080109' },
                 { loc: 'United Kingdom', nbr: '+44 7510 080146' },
-                { loc: 'United Kingdom', nbr: '+44 753 340 3149' },
-                { loc: 'United Kingdom', nbr: '+44 750 340 2850' },
+                { loc: 'United Kingdom', nbr: '+44 7533 403149' },
+                { loc: 'United Kingdom', nbr: '+44 7503 402850' },
                 { loc: 'United Kingdom', nbr: '+44 7510 080141' },
                 { loc: 'United Kingdom', nbr: '+44 7510 080125' },
-                { loc: 'United Kingdom', nbr: '+44 730 991 7830' },
+                { loc: 'United Kingdom', nbr: '+44 7309 917830' },
                 { loc: 'Russian Federation', nbr: '+7 921 162-96-74' },
                 { loc: 'Russian Federation', nbr: '+7 921 167-95-62' },
                 { loc: 'Russian Federation', nbr: '+7 921 167-96-65' },
-                { loc: 'Ukraine', nbr: '+380 93 248 5981' },
-                { loc: 'Poland', nbr: '+48 72 784 25 36' },
-                { loc: 'Poland', nbr: '+48 72 271 74 28' },
+                { loc: 'Ukraine', nbr: '+380 9324 85981' },
+                { loc: 'Poland', nbr: '+48 727 842 536' },
+                { loc: 'Poland', nbr: '+48 722 717 428' },
                 { loc: 'Netherlands', nbr: '+31 6 47264567' },
-                { loc: 'India', nbr: '+91 74287 23247' },
-                { loc: 'India', nbr: '+91 74287 30894' },
-                { loc: 'India', nbr: '+91 74287 31210' },
+                { loc: 'India', nbr: '+91 7428 723 247' },
+                { loc: 'India', nbr: '+91 7428 730 894' },
+                { loc: 'India', nbr: '+91 742 873 1210' },
                 { loc: 'Israel', nbr: '+972 55-260-3210' },
                 { loc: 'Kazakhstan', nbr: '+7 778 949 0683' },
                 { loc: 'Thailand', nbr: '+66 95 396 1043' },
@@ -106,6 +105,10 @@ describe('Unit tests', () => {
             ];
 
             assert.deepEqual(actual, expected)
+        })
+        it.skip('Bad number', async () => {
+            // need to figure out how to test badly formatted numbers
+            // e.g. +7755722696, which should be +77755722696
         })
         it('Countries', async () => {
             var actual = await sms.countries()
