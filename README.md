@@ -76,7 +76,7 @@ when the message was sent e.g.
 * `regexp` is a regular expression used to match against messages received
 
 The method checks the site for messages sent to the receiver by the sender
-matching the given regular.  A true/false value is returned indicating whether
+matching the given regular expression.  A true/false value is returned indicating whether
 the regular expressions matched against any message
 
 ### watch(cfg)
@@ -204,5 +204,4 @@ ISC
 
 ## Support
 
-For support post an issue on Github or reach out to me on Telegram.
-My username is [@ekkis](https://t.me/ekkis)
+For support post an issue on Github or reach out to me, [@ekkis](https://t.me/ekkis), on Telegram
