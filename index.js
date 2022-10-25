@@ -64,7 +64,7 @@ var self = module.exports = {
 			var o = {
 				sender: clean(cells[i]),
 				message: cells[i + 1],
-				time: cells[i + 2].replace(/[()]/g, '') // remove parens from "(2 minutes) ago"
+				time: getSeconds(cells[i + 2])
 			};
 			ret.push(o);
 		}
@@ -97,6 +97,13 @@ var self = module.exports = {
 function getText(html, className) {
 	return html.querySelectorAll('.' + className)
 		.map(node => node.rawText);
+}
+
+function getSeconds(s) {
+	var n = Number(s.match(/\d+/)[0])
+	if (s.match(/minute/)) n *= 60
+	if (s.match(/hour/)) n *= 60*60
+	return n
 }
 
 function clean(nbr) {

@@ -11,7 +11,7 @@ const Timeout = (() => {
 // integration tests must be run first because the dependency
 // injection needed for the unit tests cannot be undone
 
-describe.skip('Integration tests', function () {
+describe('Integration tests', function () {
     this.timeout(5000); // the site is a bit slow somtimes and exceeds the mocha timeout
 
     describe('Numbers', () => {
@@ -141,13 +141,13 @@ describe('Unit tests', () => {
         it('Returns correct list', async () => {
             var actual = await sms.messages()
             var expected = [
-                { "sender": "12066908413", "message": "\ncraigslist secret code for JOSHHART79@HOTMAIL.COM is 93931. Do not share this code for any reason. Any request for it is a scam.\n", "time": "7 seconds ago " }, 
-                { "sender": "13856007183", "message": "\nYour Fetch one-time security code is 844129. (Expires in 10 minutes.)\n@fetchrewards.com\n", "time": "18 seconds ago " }, 
-                { "sender": "6245", "message": "\nadmin@postalusa.org / USPS / Dear Custoumer,\nUSPS informs you that Your shipment that Your shipment\nis still waiting for instructions from you, co\n", "time": "28 seconds ago " }, 
-                { "sender": "22395", "message": "\nYour SIGNAL verification code is: 519048\n", "time": "44 seconds ago " }, 
-                { "sender": "72975", "message": "\nPayPal: 971844 is your security code. Don't share your code.\n", "time": "1 minute ago " }, 
-                { "sender": "72975", "message": "\nPayPal: 971844 is your security code. Don't share your code.\n", "time": "1 minute ago " }, 
-                { "sender": "86753", "message": "\n6148 is your Venmo phone verification code. Enter it at venmo.com or in the Venmo app to verify your account.\n", "time": "2 minutes ago " }
+                { "sender": "12066908413", "message": "\ncraigslist secret code for JOSHHART79@HOTMAIL.COM is 93931. Do not share this code for any reason. Any request for it is a scam.\n", "time": 7 }, 
+                { "sender": "13856007183", "message": "\nYour Fetch one-time security code is 844129. (Expires in 10 minutes.)\n@fetchrewards.com\n", "time": 18 }, 
+                { "sender": "6245", "message": "\nadmin@postalusa.org / USPS / Dear Custoumer,\nUSPS informs you that Your shipment that Your shipment\nis still waiting for instructions from you, co\n", "time": 28 }, 
+                { "sender": "22395", "message": "\nYour SIGNAL verification code is: 519048\n", "time": 44 }, 
+                { "sender": "72975", "message": "\nPayPal: 971844 is your security code. Don't share your code.\n", "time": 60 }, 
+                { "sender": "72975", "message": "\nPayPal: 971844 is your security code. Don't share your code.\n", "time": 60 }, 
+                { "sender": "86753", "message": "\n6148 is your Venmo phone verification code. Enter it at venmo.com or in the Venmo app to verify your account.\n", "time": 120 }
             ]
 
             assert.deepEqual(actual, expected)

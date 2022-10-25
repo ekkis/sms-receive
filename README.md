@@ -60,13 +60,13 @@ A list of the countries for which phone numbers are available is returned e.g.
 
 Retrieves a list of the messages recently sent to the given receiver by various
 senders.  This list shifts across time as the service expires old messages.  The
-objects returned comprise a sender phone number, the message, and a time offset
-when the message was sent e.g.
+objects returned comprise a sender phone number, the message, and a time offset indicated
+in seconds elapsed since the message was sent e.g.
 ```javascript
 [{
     sender: '+19852502821',
     message: 'Use 428210 como seu codigo de login para o Tinder. (Account Kit by Facebook)',
-    time: '2 minutes ago'
+    time: 120
 }]
 ```
 
