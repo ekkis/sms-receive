@@ -59,15 +59,12 @@ var self = module.exports = {
 		var s = await config.fetch(url);
 		var html = HTML.parse(s);
 		var cells = getText(html, config.message);
-
 		var ret = [];
-		for (var i = 0; i < cells.length; i += 6) {
+		for (var i = 0; i < cells.length; i += 3) {
 			var o = {
-				sender: cells[i + 1],
-				message: cells[i + 4],
-				time: cells[i + 3]
-					.replace(/[()]/g, '') // remove parens from "(2 minutes) ago"
-					.replace(/ real message at receive-smss.com\/\d+$/g, '')
+				sender: clean(cells[i]),
+				message: cells[i + 1],
+				time: cells[i + 2].replace(/[()]/g, '') // remove parens from "(2 minutes) ago"
 			};
 			ret.push(o);
 		}
