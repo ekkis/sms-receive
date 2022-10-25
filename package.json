@@ -26,6 +26,6 @@
     "phonenumberlite": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "^6.1.4"
+    "mocha": "^10.1.0"
   }
 }
